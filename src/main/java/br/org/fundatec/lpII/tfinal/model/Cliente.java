@@ -3,6 +3,8 @@ package br.org.fundatec.lpII.tfinal.model;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -16,14 +18,14 @@ public class Cliente {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
+    @Column(length = 50, nullable = false)
     private String nome;
 
-    private String identidade;
-
+    @Column(length = 14, nullable = false, unique = true)
     private String cpf;
 
-    @OneToOne
-    @JoinColumn(name = "", columnDefinition = "string")
-    private Endereco endereco;
+    @OneToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE, CascadeType.REFRESH})
+    @JoinColumn(name = "cliente_id", referencedColumnName = "id")
+    private List<Endereco> enderecos;
 
 }

@@ -2,6 +2,8 @@ package br.org.fundatec.lpII.tfinal.controller;
 
 import br.org.fundatec.lpII.tfinal.controller.request.ClienteRequest;
 import br.org.fundatec.lpII.tfinal.controller.response.ClienteResponse;
+import br.org.fundatec.lpII.tfinal.model.Cliente;
+import br.org.fundatec.lpII.tfinal.service.ClienteService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
@@ -11,12 +13,21 @@ import java.util.List;
 @RequestMapping(path = "/clientes")
 public class ClienteController {
 
+    private final ClienteService clienteService;
+
+    public ClienteController(ClienteService clienteService) {
+        this.clienteService = clienteService;
+    }
+
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
     public ClienteResponse criarCliente(
             @RequestBody ClienteRequest clienteRequest
     ) {
-        return new ClienteResponse();
+        Cliente model = clienteRequest.toModel();
+        Cliente salvo = clienteService.criarNovo(model);
+        return ClienteResponse.of(salvo);
+        // return ClienteResponse.of(clienteService.criarNovo(clienteRequest.toModel));
     }
 
     @GetMapping
@@ -33,17 +44,16 @@ public class ClienteController {
     }
 
     @DeleteMapping(path = "/{id}")
-    public void deletarCliente(@PathVariable Long id) {
+    public void deletarCliente(@PathVariable Integer id) {
 
     }
 
     @PutMapping(path = "/{id}")
-    public ClienteResponse editarCliente(@PathVariable Long id) {
-        return ClienteResponse.builder()
-                .id(1)
-                .nome("Teste")
-                .cpf("cpf")
-                .build();
+    public ClienteResponse editarCliente(@PathVariable Integer id,
+                                         @RequestBody ClienteRequest clienteRequest) {
+        return ClienteResponse.of(
+                    clienteService.editarCliente(id, clienteRequest.toModel()
+                ));
     }
 
 }

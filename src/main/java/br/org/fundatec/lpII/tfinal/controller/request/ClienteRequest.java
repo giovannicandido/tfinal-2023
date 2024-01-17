@@ -3,6 +3,8 @@ package br.org.fundatec.lpII.tfinal.controller.request;
 import br.org.fundatec.lpII.tfinal.model.Cliente;
 import lombok.Data;
 
+import java.util.List;
+
 /**
  * {
  *     "id": 1,
@@ -33,7 +35,7 @@ public class ClienteRequest {
         return Cliente.builder()
                 .nome(nome)
                 .cpf(cpf)
-                .endereco(endereco.toModel())
+                .enderecos(List.of(endereco.toModel()))
                 .build();
     }
 }

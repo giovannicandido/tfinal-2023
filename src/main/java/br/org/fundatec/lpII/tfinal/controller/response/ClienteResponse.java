@@ -44,7 +44,7 @@ public class ClienteResponse {
                 .nome(cliente.getNome())
                 .cpf(cliente.getCpf())
                 .endereco(
-                        List.of(EnderecoResponse.of(cliente.getEndereco()))
+                        EnderecoResponse.of(cliente.getEnderecos())
                 )
                 .build();
     }
