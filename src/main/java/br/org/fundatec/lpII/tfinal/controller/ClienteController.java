@@ -3,6 +3,7 @@ package br.org.fundatec.lpII.tfinal.controller;
 import br.org.fundatec.lpII.tfinal.controller.request.ClienteRequest;
 import br.org.fundatec.lpII.tfinal.controller.response.ClienteResponse;
 import br.org.fundatec.lpII.tfinal.model.Cliente;
+import br.org.fundatec.lpII.tfinal.repository.ClienteRepository;
 import br.org.fundatec.lpII.tfinal.service.ClienteService;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
@@ -34,13 +35,10 @@ public class ClienteController {
     public List<ClienteResponse> listarClientes(
             @RequestParam(name = "nome", required = false) String nomeCliente
     ) {
-        return List.of(
-                ClienteResponse.builder()
-                        .id(1)
-                        .nome("Teste")
-                        .cpf("cpf")
-                        .build()
-        );
+        return clienteService.listarCliente(nomeCliente)
+                .stream()
+                .map(ClienteResponse::of)
+                .toList();
     }
 
     @DeleteMapping(path = "/{id}")

@@ -4,6 +4,8 @@ import br.org.fundatec.lpII.tfinal.model.Cliente;
 import br.org.fundatec.lpII.tfinal.repository.ClienteRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 public class ClienteService {
     private final ClienteRepository repository;
@@ -25,5 +27,13 @@ public class ClienteService {
         existente.setEnderecos(cliente.getEnderecos());
 
         return repository.save(existente);
+    }
+
+    public List<Cliente> listarCliente(String nome) {
+        if(nome == null || nome.trim().equals("")) {
+            return repository.findAll();
+        }
+        return repository.buscarClientePeloNome("%" + nome + "%");
+//        return repository.findAllByNomeIsLike(nome);
     }
 }
