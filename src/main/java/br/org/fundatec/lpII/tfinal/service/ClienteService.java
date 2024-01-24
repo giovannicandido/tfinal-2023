@@ -4,6 +4,7 @@ import br.org.fundatec.lpII.tfinal.model.Cliente;
 import br.org.fundatec.lpII.tfinal.repository.ClienteRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -25,7 +26,6 @@ public class ClienteService {
         existente.setCpf(cliente.getCpf());
         existente.setNome(cliente.getNome());
         existente.setEnderecos(cliente.getEnderecos());
-
         return repository.save(existente);
     }
 

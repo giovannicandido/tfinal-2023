@@ -3,6 +3,7 @@ package br.org.fundatec.lpII.tfinal.controller.request;
 import br.org.fundatec.lpII.tfinal.model.Cliente;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,7 +36,7 @@ public class ClienteRequest {
         return Cliente.builder()
                 .nome(nome)
                 .cpf(cpf)
-                .enderecos(List.of(endereco.toModel()))
+                .enderecos(new ArrayList(List.of(endereco.toModel())))
                 .build();
     }
 }
