@@ -15,7 +15,7 @@ public interface ClienteRepository extends JpaRepository<Cliente, Integer> {
     // spring name convention (magic names)
     List<Cliente> findAllByNomeIsLike(String nome);
 
-    @Query(value = "update c set c.nome = :nome from Cliente c where c.id = :id")
+    @Query(value = "update Cliente set nome = :nome where id = :id")
     @Modifying
     void editarClientePeloNome(String id, String nome);
 }
