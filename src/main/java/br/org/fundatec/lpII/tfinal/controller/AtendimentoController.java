@@ -5,6 +5,7 @@ import br.org.fundatec.lpII.tfinal.controller.request.AdicionarProdutoRequest;
 import br.org.fundatec.lpII.tfinal.controller.request.EditarAtendimentoRequest;
 import br.org.fundatec.lpII.tfinal.controller.request.IniciarAtedimentoRequest;
 import br.org.fundatec.lpII.tfinal.controller.response.AtendimentoResponse;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
@@ -17,7 +18,7 @@ public class AtendimentoController {
 
     @PostMapping
     public void iniciarAtendimento(
-            @RequestBody IniciarAtedimentoRequest iniciarAtedimentoRequest
+            @RequestBody @Valid IniciarAtedimentoRequest iniciarAtedimentoRequest
             ) {
 
     }
